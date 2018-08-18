@@ -2,6 +2,11 @@
 
 Inspired by https://github.com/hyperledger/fabric-test and https://github.com/hyperledger/fabric-samples
 
+## Prerequisites
+
+- Install [Docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/)
+
+
 ## Start hyperledger network
 
 - `./start.sh`
