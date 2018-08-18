@@ -1,0 +1,14 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: wayne-entreprises.com
+    Specs:
+      - Hostname: orderer1
+      - Hostname: orderer2
+PeerOrgs:
+  - Name: AppliedScienceDivision
+    Domain: asd.wayne-entreprises.com
+    EnableNodeOUs: true
+    Template:
+      Count: 3
+    Users:
+      Count: 1

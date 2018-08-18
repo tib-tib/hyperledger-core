@@ -1,0 +1,71 @@
+---
+
+Profiles:
+
+    OrdererGenesis:
+        Capabilities:
+            <<: *ChannelCapabilities
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Consortiums:
+            ASDConsortium:
+                Organizations:
+                    - *ASDOrg
+    Channel:
+        Consortium: ASDConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ASDOrg
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+Organizations:
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: crypto-config/ordererOrganizations/wayne-entreprises.com/msp
+
+    - &ASDOrg
+        Name: ASDOrgMSP
+        ID: ASDOrgMSP
+        MSPDir: crypto-config/peerOrganizations/asd.wayne-entreprises.com/msp
+        AnchorPeers:
+            - Host: peer0.asd.wayne-entreprises.com
+              Port: 7051
+
+Orderer: &OrdererDefaults
+    OrdererType: kafka
+
+    Addresses:
+        - orderer1.wayne-entreprises.com:7050
+        - orderer2.wayne-entreprises.com:7050
+
+    BatchTimeout: 2s
+
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+
+    Kafka:
+        Brokers:
+            - fabric-kafka:9092
+    Organizations:
+
+Application: &ApplicationDefaults
+    Organizations:
+
+Capabilities:
+    Global: &ChannelCapabilities
+        V1_1: true
+
+    Orderer: &OrdererCapabilities
+        V1_1: true
+
+    Application: &ApplicationCapabilities
+        V1_1: true
